@@ -14,11 +14,41 @@
 /**
  * palettes
  */
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout';
+
+$suchen = array
+(
+	',adminEmail;', // Zeichensatz hier anhängen
+	',allowedDownload', // Editierbare Dateien
+	',indexProtected;' // Speicherzeiten hier anhängen
+);
+
+$ersetzen = array
+(
+	',adminEmail,characterSet;', // Zeichensatz
+	',allowedDownload,editableFiles', // Editierbare Dateien
+	',indexProtected;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout;' // Speicherzeiten
+);
+
+// Ersetzungen vornehmen (Ersetzung ab Contao 4.7.0)
+$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = str_replace($suchen, $ersetzen, $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']);
 
 /**
  * fields
  */
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['characterSet'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['characterSet'],
+	'inputType'               => 'text',
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'alnum', 'nospace'=>true, 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['editableFiles'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['editableFiles'],
+	'inputType'               => 'text',
+	'eval'                    => array('tl_class'=>'w50')
+);
 
 $GLOBALS['TL_DCA']['tl_settings']['fields']['undoPeriod'] = array
 ( 
