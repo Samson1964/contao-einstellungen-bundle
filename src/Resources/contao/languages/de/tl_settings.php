@@ -1,18 +1,8 @@
 <?php 
 
-/**
- * Contao Open Source CMS
- * Copyright (C) 2005-2014 Leo Feyer
- *
- */
-
-
-/**
- * Formulare
- */
-
-$GLOBALS['TL_LANG']['tl_settings']['linkscollection_legend'] = 'Linksammlung';
-
-$GLOBALS['TL_LANG']['tl_settings']['linkscollection_new_duration'] = array('Anzahl Tage Neuer Link', 'Anzahl der Tage, die ein Link als neu gilt');
-$GLOBALS['TL_LANG']['tl_settings']['linkscollection_test_duration'] = array('Anzahl Tage Prüfung', 'Anzahl der Tage, nach dem ein Link neu geprüft wird');
-$GLOBALS['TL_LANG']['tl_settings']['linkscollection_webarchiv'] = array('Webarchivlink', 'Prefix des Links zu archive.org');
+// Abschnitt Speicherzeiten
+$GLOBALS['TL_LANG']['tl_settings']['timeout_legend'] = 'Speicherzeiten';
+$GLOBALS['TL_LANG']['tl_settings']['undoPeriod'] = array('Speicherzeit für Undo-Schritte', 'Hier können Sie die Speicherzeit für Undo-Schritte in Sekunden eingeben (24 Stunden = 86400 Sekunden).');
+$GLOBALS['TL_LANG']['tl_settings']['versionPeriod'] = array('Speicherzeit für Versionen', 'Hier können Sie die Speicherzeit für verschiedene Versionen eines Datensatzes in Sekunden eingeben (90 Tage = 7776000 Sekunden).');
+$GLOBALS['TL_LANG']['tl_settings']['logPeriod'] = array('Speicherzeit für Log-Einträge', 'Hier können Sie die Speicherzeit für Log-Einträge in Sekunden eingeben (14 Tage = 1209600 Sekunden).');
+$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'] = array('Verfallszeit einer Session', 'Hier können Sie die Verfallszeit einer Session in Sekunden eingeben (60 Minuten = 3600 Sekunden).');

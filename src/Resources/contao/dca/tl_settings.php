@@ -14,40 +14,36 @@
 /**
  * palettes
  */
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';{linkscollection_legend:hide},linkscollection_new_duration,linkscollection_test_duration,linkscollection_webarchiv';
+$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout';
 
 /**
  * fields
  */
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['linkscollection_new_duration'] = array
-(
-	'label'         => &$GLOBALS['TL_LANG']['tl_settings']['linkscollection_new_duration'],
-	'inputType'     => 'text',
-	'eval'          => array
-	(
-		'tl_class'  => 'w50', 
-		'rgxp'      => 'numeric'
-	)
+$GLOBALS['TL_DCA']['tl_settings']['fields']['undoPeriod'] = array
+( 
+	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['undoPeriod'],
+	'inputType'               => 'text',
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 );
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['linkscollection_test_duration'] = array
+$GLOBALS['TL_DCA']['tl_settings']['fields']['versionPeriod'] = array
 (
-	'label'         => &$GLOBALS['TL_LANG']['tl_settings']['linkscollection_test_duration'],
-	'inputType'     => 'text',
-	'eval'          => array
-	(
-		'tl_class'  => 'w50', 
-		'rgxp'      => 'numeric'
-	)
+	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['versionPeriod'],
+	'inputType'               => 'text',
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 );
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['linkscollection_webarchiv'] = array
+$GLOBALS['TL_DCA']['tl_settings']['fields']['logPeriod'] = array
 (
-	'label'         => &$GLOBALS['TL_LANG']['tl_settings']['linkscollection_webarchiv'],
-	'inputType'     => 'text',
-	'eval'          => array
-	(
-		'tl_class'  => 'long', 
-	)
+	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['logPeriod'],
+	'inputType'               => 'text',
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['sessionTimeout'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'],
+	'inputType'               => 'text',
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'minlength'=>3, 'nospace'=>true, 'tl_class'=>'w50')
 );
