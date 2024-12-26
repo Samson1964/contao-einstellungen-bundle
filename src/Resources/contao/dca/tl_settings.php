@@ -1,4 +1,6 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
+
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 /**
  * Contao Open Source CMS
@@ -12,25 +14,52 @@
  */
 
 /**
- * palettes
+ * Palette manipulieren
  */
 
-$suchen = array
-(
-	',adminEmail;', // Zeichensatz hier anhängen
-	',allowedDownload', // Editierbare Dateien
-	',indexProtected;' // Speicherzeiten hier anhängen
-);
+// Contao 4.7  'default' => '{global_legend},adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{backend_legend:hide},doNotCollapse,resultsPerPage,maxResultsPerPage;{frontend_legend},folderUrl,doNotRedirectEmpty;{security_legend:hide},disableRefererCheck,allowedTags;{files_legend:hide},allowedDownload,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadTypes,maxFileSize,imageWidth,imageHeight;{cron_legend:hide},disableCron;{search_legend:hide},enableSearch,indexProtected;{chmod_legend},defaultUser,defaultGroup,defaultChmod'
+// Contao 4.9  'default' => '{global_legend},adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{backend_legend:hide},doNotCollapse,resultsPerPage,maxResultsPerPage;{frontend_legend},folderUrl,doNotRedirectEmpty;{security_legend:hide},disableRefererCheck,allowedTags,allowedAttributes;{files_legend:hide},allowedDownload,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadTypes,maxFileSize,imageWidth,imageHeight;{cron_legend:hide},disableCron;{chmod_legend},defaultUser,defaultGroup,defaultChmod'
+// Contao 4.13 'default' => '{global_legend},adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{backend_legend:hide},doNotCollapse,resultsPerPage,maxResultsPerPage;{security_legend:hide},disableRefererCheck,allowedTags,allowedAttributes;{files_legend:hide},allowedDownload,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadTypes,maxFileSize,imageWidth,imageHeight;{cron_legend:hide},disableCron;{chmod_legend},defaultUser,defaultGroup,defaultChmod'
 
-$ersetzen = array
-(
-	',adminEmail,characterSet;', // Zeichensatz
-	',allowedDownload,editableFiles', // Editierbare Dateien
-	',indexProtected;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout;' // Speicherzeiten
-);
-
-// Ersetzungen vornehmen (Ersetzung ab Contao 4.7.0)
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = str_replace($suchen, $ersetzen, $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']);
+if(version_compare(VERSION.BUILD, '4.13.0', '>='))
+{
+	//echo '<h4>Version >= 4.13.0</h4>'.VERSION.BUILD;
+	PaletteManipulator::create()
+	    ->addField('characterSet', 'adminEmail', PaletteManipulator::POSITION_AFTER)
+	    ->addField('editableFiles', 'allowedDownload', PaletteManipulator::POSITION_AFTER)
+	    ->addLegend('timeout_legend', 'uploads_legend', PaletteManipulator::POSITION_AFTER)
+	    ->addField('undoPeriod', 'timeout_legend', PaletteManipulator::POSITION_APPEND)
+	    ->addField('versionPeriod', 'timeout_legend', PaletteManipulator::POSITION_APPEND)
+	    ->addField('logPeriod', 'timeout_legend', PaletteManipulator::POSITION_APPEND)
+	    ->addField('sessionTimeout', 'timeout_legend', PaletteManipulator::POSITION_APPEND)
+	    ->applyToPalette('default', 'tl_settings');
+}
+elseif(version_compare(VERSION.BUILD, '4.9.0', '>='))
+{
+	//echo '<h4>Version >= 4.9.0</h4>';
+	PaletteManipulator::create()
+	    ->addField('characterSet', 'adminEmail', PaletteManipulator::POSITION_AFTER)
+	    ->addField('editableFiles', 'allowedDownload', PaletteManipulator::POSITION_AFTER)
+	    ->addLegend('timeout_legend', 'uploads_legend', PaletteManipulator::POSITION_AFTER)
+	    ->addField('undoPeriod', 'timeout_legend', PaletteManipulator::POSITION_AFTER)
+	    ->addField('versionPeriod', 'undoPeriod', PaletteManipulator::POSITION_AFTER)
+	    ->addField('logPeriod', 'versionPeriod', PaletteManipulator::POSITION_AFTER)
+	    ->addField('sessionTimeout', 'logPeriod', PaletteManipulator::POSITION_AFTER)
+	    ->applyToPalette('default', 'tl_settings');
+}
+elseif(version_compare(VERSION.BUILD, '4.7.0', '>='))
+{
+	//echo '<h4>Version >= 4.7.0</h4>';
+	PaletteManipulator::create()
+	    ->addField('characterSet', 'adminEmail', PaletteManipulator::POSITION_AFTER)
+	    ->addField('editableFiles', 'allowedDownload', PaletteManipulator::POSITION_AFTER)
+	    ->addLegend('timeout_legend', 'search_legend', PaletteManipulator::POSITION_AFTER)
+	    ->addField('undoPeriod', 'timeout_legend', PaletteManipulator::POSITION_AFTER)
+	    ->addField('versionPeriod', 'undoPeriod', PaletteManipulator::POSITION_AFTER)
+	    ->addField('logPeriod', 'versionPeriod', PaletteManipulator::POSITION_AFTER)
+	    ->addField('sessionTimeout', 'logPeriod', PaletteManipulator::POSITION_AFTER)
+	    ->applyToPalette('default', 'tl_settings');
+}
 
 /**
  * fields
