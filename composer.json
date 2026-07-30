@@ -1,7 +1,14 @@
 {
     "name": "schachbulle/contao-einstellungen-bundle",
     "type": "contao-bundle",
-    "description": "Einstellungen-Bundle für Contao 4",
+    "description": "Stellt Einstellungen im Backend wieder her, die Contao ab Version 4.7 nicht mehr anbietet.",
+    "keywords": [
+        "contao",
+        "einstellungen",
+        "backend",
+        "tl_settings"
+    ],
+    "homepage": "https://github.com/Samson1964/contao-einstellungen-bundle",
     "license": "LGPL-3.0-or-later",
     "authors": [
         {
